@@ -38,18 +38,10 @@ public class Main
 				int b = pixel.getBlue();
 				//HSP Color Model: sqrt(0.299 * R^2 + 0.587 * G^2 + 0.114 * B^2)
 				int brightness = (int)Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
-				//test:
-				Color newPixel = new Color(brightness, brightness, brightness);
 
-				image.setRGB(x, y, newPixel.getRGB());
 			}
 		}
-
-		File out = new File("src/Images/grayscaleWeeb.jpg");
-		try{
-			ImageIO.write(image, "jpg", out);
-		}catch (IOException e){}
-
+		
 	}
 
 	private static void printRGBArray(BufferedImage image)
