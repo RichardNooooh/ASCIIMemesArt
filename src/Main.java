@@ -38,7 +38,7 @@ public class Main
 				int b = pixel.getBlue();
 				//HSP Color Model: sqrt(0.299 * R^2 + 0.587 * G^2 + 0.114 * B^2)
 				int brightness = (int)Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
-
+				String ascii = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 			}
 		}
 		
