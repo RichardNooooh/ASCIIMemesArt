@@ -15,6 +15,7 @@ public class Main
 	private static void startTest()
 	{
 		//TODO replace this current image processing with my SimpleImg project as a dependency using Maven
+		//TODO implement ImgScalr
 		//obtain image
 		BufferedImage image = null;
 		try
@@ -23,6 +24,36 @@ public class Main
 			image = ImageIO.read(input);
 		} catch (Exception e) {}
 
+		//iterate through each pixel and calculate its brightness
+		int width = image.getWidth();
+		int height = image.getHeight();
+
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				Color pixel = new Color(image.getRGB(x, y));
+				int r = pixel.getRed();
+				int g = pixel.getBlue();
+				int b = pixel.getBlue();
+				//HSP Color Model: sqrt(0.299 * R^2 + 0.587 * G^2 + 0.114 * B^2)
+				int brightness = (int)Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
+				//test:
+				Color newPixel = new Color(brightness, brightness, brightness);
+
+				image.setRGB(x, y, newPixel.getRGB());
+			}
+		}
+
+		File out = new File("src/Images/grayscaleWeeb.jpg");
+		try{
+			ImageIO.write(image, "jpg", out);
+		}catch (IOException e){}
+
+	}
+
+	private static void printRGBArray(BufferedImage image)
+	{
 		//iterate through pixels
 		int width = image.getWidth();
 		int height = image.getHeight();
@@ -38,11 +69,6 @@ public class Main
 				rgbArray[x][y][2] = currPixel.getBlue();
 			}
 		}
-
-	}
-
-	private static void printRGBArray(int width, int height, int[][][] rgbArray)
-	{
 		//printout 3d array
 		for (int k = 0; k < 3; k++)
 		{
