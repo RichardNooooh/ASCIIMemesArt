@@ -32,16 +32,20 @@ public class Main
 		{
 			for (int y = 0; y < height; y++)
 			{
-				Color pixel = new Color(image.getRGB(x, y));
+				Color pixel = new Color(image.getRGB(y, x));
 				int r = pixel.getRed();
 				int g = pixel.getBlue();
 				int b = pixel.getBlue();
 				//HSP Color Model: sqrt(0.299 * R^2 + 0.587 * G^2 + 0.114 * B^2)
-				int brightness = (int)Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
-				String ascii = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+				double brightness = Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
+				String ascii = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"; //70 long-
+				//scale factor: 70/256
+				int ind = (int)(brightness * 70 / 256);
+				System.out.print(ascii.charAt(ind)); //TODO edit scaling to have it somewhat nonlinear, to balance the uneven font
 			}
+			System.out.println();
 		}
-		
+
 	}
 
 	private static void printRGBArray(BufferedImage image)
