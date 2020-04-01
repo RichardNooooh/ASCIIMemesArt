@@ -1,18 +1,20 @@
 from PIL import Image
 from PIL import ImageFont, ImageDraw
-from PIL import ImageMath
 
-font = ImageFont.truetype("Open_Sans/OpenSans-Regular.ttf")
-mask = font.getmask('a')
-# draw = ImageDraw.Draw()
+# sample text and font
+unicode_text = u"A"
+font = ImageFont.truetype("Open_Sans/OpenSans-Regular.ttf", 28, encoding="unic")
 
-size = 50, 50
-blank = Image.new('L', size, 256)  # not sure what value is needed for pure white
-blank.save("images/test.png")
+# get the line size
+text_width, text_height = font.getsize(unicode_text)
 
-#
-# s = 0
-# ImageMath.eval("sum += int(a), 'L'", sum = s, a = mask)
+# create a blank canvas with extra space between lines
+canvas = Image.new('RGB', (text_width, text_height+1), "white")
 
-# print(mask)
-# mask.save("images/a.jpg")
+# draw the text onto the text canvas, and use black as the text color
+draw = ImageDraw.Draw(canvas)
+draw.text((0, 0), unicode_text, 'black', font)
+
+# save the blank canvas to a file
+canvas.save("images/test.png", "PNG")
+# canvas.show()
