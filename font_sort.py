@@ -6,7 +6,6 @@ import string
 
 # from https://stackoverflow.com/questions/24085996/how-i-can-load-a-font-file-with-pil-imagefont-truetype-without-specifying-the-ab
 
-
 # sample text and font
 # unicode_text = u"t"
 # font = ImageFont.truetype("Open_Sans/OpenSans-Regular.ttf", 28, encoding="unic")
@@ -32,7 +31,7 @@ def density_of_letter(im: Image, size: Tuple[int]) -> float:
     for i in range(x):
         for j in range(y):
             pixel = im.getpixel((i, j))
-            if 0 in pixel:
+            if pixel == 0:
                 black_pixel_count += 1
 
     return black_pixel_count / (x * y)
@@ -43,7 +42,7 @@ size = (50, 50)
 
 for letter in string.ascii_lowercase:
     # text_width, text_height = font.getsize(letter)
-    canvas_letter = Image.new('RGB', size, "white")
+    canvas_letter = Image.new('L', size, "white")
     draw_letter = ImageDraw.Draw(canvas_letter)
     draw_letter.text((0, 0), letter, 'black', font)
     dens = density_of_letter(canvas_letter, size)
