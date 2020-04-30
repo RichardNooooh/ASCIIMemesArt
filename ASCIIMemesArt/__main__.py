@@ -1,9 +1,9 @@
 import math
-from font_sort import FontSort
+from ASCIIMemesArt.model.font_sort import FontSort
 
 from PIL import Image
 
-im = Image.open("images/weeb.jpg")
+im = Image.open("ASCIIMemesArt/resources/images/weeb.jpg")
 pixel = im.load()
 
 width, height = im.size
@@ -11,7 +11,7 @@ width, height = im.size
 output_string = ""
 
 mapping_string = " .'`^\",:;Il!i~+_-?1|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
-ft = FontSort("Open_Sans/OpenSans-Regular.ttf", mapping_string)
+ft = FontSort("ASCIIMemesArt/resources/Open_Sans/OpenSans-Regular.ttf", mapping_string)
 asciiMap = ft.get_reversed_font_dict()
 
 for y in range(height):
